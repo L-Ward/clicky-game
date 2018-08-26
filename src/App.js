@@ -24,50 +24,62 @@ const imagesArray = [
   {
     img: cat1,
     id: 1,
+    clicked: false,
   },
   {
     img: cat2,
     id: 2,
+    clicked: false,
   },
   {
     img: cat3,
     id: 3,
+    clicked: false,
   },
   {
     img: cat4,
     id: 4,
+    clicked: false,
   },
   {
     img: cat5,
     id: 5,
+    clicked: false,
   },
   {
     img: cat6,
     id: 6,
+    clicked: false,
   },
   {
     img: cat7,
     id: 7,
+    clicked: false,
   },
   {
     img: cat8,
     id: 8,
+    clicked: false,
   },
   {
     img: cat9,
     id: 9,
+    clicked: false,
   },
   {
     img: cat10,
     id: 10,
+    clicked: false,
   },
   {
     img: cat11,
     id: 11,
+    clicked: false,
   },
   {
     img: cat12,
     id: 12,
+    clicked: false,
   }
 ];
 
@@ -79,7 +91,7 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <Jumbotron />
-        <Gameboard images={imagesArray}/>
+        <Gameboard images={imagesArray} />
         <Footer />
       </div>
     );
