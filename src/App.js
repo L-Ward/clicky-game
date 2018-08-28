@@ -17,10 +17,7 @@ import cat10 from './images/cat10.jpeg';
 import cat11 from './images/cat11.jpeg';
 import cat12 from './images/cat12.jpeg';
 
-
-let score = 0;
-let topScore = 0;
-const imagesArray = [
+const images = [
   {
     img: cat1,
     id: 1,
@@ -86,12 +83,58 @@ const imagesArray = [
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleClick.bind(this);
+    this.state = {
+      score: 0,
+      topScore: 0,
+      guessText: 'Click an image to begin',
+      imgArray: JSON.parse(JSON.stringify(images)), // Start as a copy and never mutate the default
+      incorrect: false
+    }
+  }
+
+  shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      x = a[i];
+      a[i] = a[j];
+      a[j] = x;
+    }
+    return a;
+  }
+
+  handleClick = (id) => {
+    console.log(images);
+    const clickedIndex = this.state.imgArray.findIndex((obj) => obj.id === id);
+    if (this.state.imgArray[clickedIndex].clicked === false) {
+      this.state.imgArray[clickedIndex].clicked = true;
+      this.setState({
+        score: this.state.score + 1,
+        topScore: this.state.score >= this.state.topScore ? this.state.topScore + 1 : this.state.topScore,
+        guessText: 'You Guessed Correctly',
+        imgArray: this.shuffle(this.state.imgArray),
+        incorrect: false
+      });
+    } else {
+      this.setState({
+        score: 0,
+        guessText: 'You Guessed Incorrectly!',
+        imgArray: this.shuffle(JSON.parse(JSON.stringify(images))),
+        incorrect: true
+      })
+    }
+  };
+
   render() {
     return (
       <div className="App">
-        <Navbar />
+        <Navbar title={this.state.guessText} score={this.state.score} topScore={this.state.topScore}/>
         <Jumbotron />
-        <Gameboard images={imagesArray} />
+        <Gameboard images={this.state.imgArray} incorrect={this.state.incorrect} clickHandler={(id) => this.handleClick(id)} />
         <Footer />
       </div>
     );

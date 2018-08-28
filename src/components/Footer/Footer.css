@@ -4,6 +4,7 @@ footer {
     color: white;
     position: relative;
     overflow: auto;
+    margin-top: 25px;
   }
 
   .bottom {
